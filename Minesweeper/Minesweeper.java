@@ -236,6 +236,8 @@ public class Minesweeper extends JPanel implements MouseListener {
 	public void leftClick(int mousex, int mousey) {
 		if (revealed)
 			return;
+		if (flag[mousex][mousey])
+			return;
 		if (start) {
 			init(mousex, mousey);
 			start = false;
