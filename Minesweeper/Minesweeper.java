@@ -27,6 +27,16 @@ public class Minesweeper extends JPanel implements MouseListener {
 	public static Minesweeper game;
 
 	/**
+	 * width of screen
+	 */
+	int screenWidth = getToolkit().getScreenSize().width;
+
+	/**
+	 * height of screen
+	 */
+	int screenHeight = getToolkit().getScreenSize().height;
+
+	/**
 	 * width of the game
 	 */
 	int width = 48;
@@ -59,12 +69,12 @@ public class Minesweeper extends JPanel implements MouseListener {
 	/**
 	 * adjacency array
 	 */
-	int[] dx = { -1, -1, -1, 0, 0, 1, 1, 1 };
+	static final int[] dx = { -1, -1, -1, 0, 0, 1, 1, 1 };
 
 	/**
 	 * adjacency array
 	 */
-	int[] dy = { -1, 0, 1, -1, 1, -1, 0, 1 };
+	static final int[] dy = { -1, 0, 1, -1, 1, -1, 0, 1 };
 
 	/**
 	 * game array
@@ -122,7 +132,7 @@ public class Minesweeper extends JPanel implements MouseListener {
 	public Minesweeper() {
 		jf = new JFrame("minesweeper");
 		jf.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		jf.setSize(2000, 1000);
+		jf.setSize(screenWidth, screenHeight);
 		jf.setVisible(true);
 		jf.add(this);
 		addMouseListener(this);
@@ -140,7 +150,6 @@ public class Minesweeper extends JPanel implements MouseListener {
 				time %= 1000;
 				Thread.sleep(1000 - time); // 1 frame per second
 				jf.repaint();
-
 			} catch (InterruptedException e) {
 				e.printStackTrace();
 			}
@@ -206,9 +215,9 @@ public class Minesweeper extends JPanel implements MouseListener {
 				g.drawRect(i * size + startx, j * size + starty, size, size);
 			}
 		}
-		g.drawOval(590, 8, 15, 15);
-		g.drawString("C", 593, 20);
-		g.drawString("Jonathan Guo", 610, 20);
+		g.drawOval(screenWidth / 2 - 50, 8, 15, 15);
+		g.drawString("C", screenWidth / 2 - 47, 20);
+		g.drawString("Jonathan Guo", screenWidth / 2 - 30, 20);
 		g.drawString("" + (mines - flags), 50, 100);
 		Font f = new Font("Helvetica", 20, 20);
 		g.setFont(f);
