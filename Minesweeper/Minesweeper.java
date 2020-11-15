@@ -190,28 +190,31 @@ public class Minesweeper extends JPanel implements MouseListener {
 	 * paint function, called each frame
 	 */
 	public void paint(Graphics g) {
+		g.setColor(Color.BLACK);
+		g.fillRect(0, 0, screenWidth, screenHeight);
 		for (int i = 0; i < width; i++) {
 			for (int j = 0; j < height; j++) {
 				if (reveal[i][j] || flag[i][j]) {
-					g.setColor(Color.CYAN);
+					g.setColor(Color.BLUE);
 					String text = "" + array[i][j];
 					if (array[i][j] == -1) {
 						text = "X";
-						g.setColor(Color.ORANGE);
+						g.setColor(new Color(100, 100, 0)); // brown
 					} else if (array[i][j] == 0)
 						text = "";
 
 					if (flag[i][j] && !revealed) {
 						text = "O";
-						g.setColor(Color.GREEN);
+						g.setColor(new Color(0, 100, 0)); // green
 					}
 					if (flag[i][j] && revealed && array[i][j] != -1)
 						g.setColor(Color.RED);
 
 					g.fillRect(i * size + startx, j * size + starty, size, size);
-					g.setColor(Color.BLACK);
+					g.setColor(Color.YELLOW);
 					g.drawString(text, i * size + startx + size / 2 - 3, j * size + starty + size / 2 + 5);
 				}
+				g.setColor(Color.YELLOW);
 				g.drawRect(i * size + startx, j * size + starty, size, size);
 			}
 		}
